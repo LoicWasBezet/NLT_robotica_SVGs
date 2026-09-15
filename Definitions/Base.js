@@ -9,14 +9,15 @@ const lightBlue = '#B8D1EB';
 const blue = '#6089BA';
 const darkBlue = '#143A55';
 const yellow = '#FBB927';
+
 const lightRed   = '#E8B6BC'; 
 const red        = '#B75B67'; 
 const darkRed    = '#4F1821';
-const redHighlight = '#ff603c';//yellow;//'#ff7e57';
+const redHighlight = red;//'#ff603c';//yellow;//'#ff7e57';
 const lightGreen = '#B8E6C8'; 
 const green      = '#5BB77B';
 const darkGreen  = '#184F2B';
-const greenHighlight = '#aefa44';// yellow;// '#b9ff21';
+const greenHighlight = green;//'#aefa44';// yellow;// '#b9ff21';
 
 const exponentials = ["⁰","¹","²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"];
 

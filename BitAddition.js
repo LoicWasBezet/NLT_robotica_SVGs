@@ -86,8 +86,6 @@ function GenerateControls(draw, display)
     let toggles = controls.group(); 
     let baseToggle = BaseChangeToggle(display, exponentState, GenerateDisplay);
     let powerToggle = PowerChangeToggle(display, exponentState, GenerateDisplay);
-    //let baseToggle = BasicToggle(display, "2", "10",{buttonFunction: BaseChangeFunction});
-    //let powerToggle = BasicToggle(display, "2"+WriteExponent(3), "8",{buttonFunction: PowerChangeFunction});
     let height = baseToggle.bbox().height;
     baseToggle.dy(-height/2-borderWidth/2);
     powerToggle.dy(height/2+borderWidth/2);
@@ -98,7 +96,6 @@ function GenerateControls(draw, display)
     toggles.dx(width + borderWidth*3/2)
 
 
-    //let lineX = screenWidth - boundingBoxWidth - (squareWidth+borderWidth) - squareWidth/2 + borderWidth*2;
     controls.dmove(leftX,boundingBoxWidth+squareWidth/2+borderWidth/2);
 
 }
@@ -115,7 +112,6 @@ function DrawBackground(draw)
 
     draw.rect(screenWidth-borderWidth-lineX,screenHeight).fill(controlColor).dx(lineX+borderWidth).radius(boundingBoxWidth+2*borderWidth);
     draw.rect(boundingBoxWidth+2*borderWidth,screenHeight).fill(controlColor).dx(lineX+borderWidth);
-    //draw.rect(borderWidth,screenHeight).fill(borderColor).dx(lineX);
 
     draw.rect(screenWidth,screenHeight-lineY-borderWidth).fill(outputColor).radius(boundingBoxWidth+2*borderWidth).dy(lineY+borderWidth);
     draw.rect(screenWidth,boundingBoxWidth+2*borderWidth).fill(outputColor).dy(lineY+borderWidth);

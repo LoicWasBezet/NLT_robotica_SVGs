@@ -5,7 +5,7 @@ import {colorSelections, WriteExponent} from './Base.js';
 
 const borderWidth = 8;
 const squareWidth = 100;
-const exponantialWidth = 32;
+const exponantialWidth = 34;
 const boundingBoxWidth = 20;
 
 const baseState = {"doWritePowers" : true, "color" : "blue", "newSquareWidth" : squareWidth};
