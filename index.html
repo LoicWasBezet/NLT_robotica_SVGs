@@ -30,6 +30,7 @@
     <br><br>
     <div id="machine-container" class="container"></div>
     <div id="machine-container2" class="container"></div>
+    <div id="machine-container5" class="container"></div>
     <div id="machine-container3" class="container"></div>
     <div id="machine-container4" class="container"></div>
 
@@ -38,11 +39,13 @@
     <script type="module">
     import { render as renderCounter } from './BitCounter.js';
     import { render as renderFlipper } from './BitFlipper.js';
+    import { render as renderNewFlipper } from './NewBitFlipper.js';
     import { render as renderAddition } from './BitAddition.js';
     import { render as renderAdditionSteps } from './BitAdditionSteps.js';
 
     renderCounter(document.getElementById('machine-container'));
     renderFlipper(document.getElementById('machine-container2'));
+    renderNewFlipper(document.getElementById('machine-container5'));
     renderAddition(document.getElementById('machine-container3'));
     renderAdditionSteps(document.getElementById('machine-container4'), {base : 10});
 

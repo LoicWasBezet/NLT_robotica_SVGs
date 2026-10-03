@@ -45,6 +45,8 @@ function BaseBox(display, content="", state = baseState)
 }
 
 function AddExponent(buttonGroup,base, bitNumber, isHidden, state = baseState){
+    
+    
     let realSquareWidth = squareWidth;
     if ("newSquareWidth" in state){
         realSquareWidth = state["newSquareWidth"];
@@ -82,7 +84,7 @@ function AddExponent(buttonGroup,base, bitNumber, isHidden, state = baseState){
     return exponent;
 }
 
-export function ButtonBox(display, content, {base=0, bitNumber = 0, buttonFunction = BaseButtonFunction, buttonDirectionDown = true, args=0, state = baseState}={}) //arguements should be passed by reference
+export function ButtonBox(display, content, {base=0, bitNumber = 0, buttonFunction = BaseButtonFunction, buttonDirectionDown = true, args=0, returnText = false, state = baseState}={}) //arguements should be passed by reference
 {
     let realSquareWidth = squareWidth;
     if ("newSquareWidth" in state){
@@ -98,7 +100,7 @@ export function ButtonBox(display, content, {base=0, bitNumber = 0, buttonFuncti
     if (buttonDirectionDown){
         buttonSides.fill(colorSelections[state["color"]].medium).dy(realSquareWidth * 16/100);
     } else {
-        buttonSides.fill(colorSelections[state["color"]].light).dmove(-realSquareWidth * 4/100, -realSquareWidth * 4/100);
+        buttonSides.fill(colorSelections[state["color"]].light).dmove(realSquareWidth * 4/100, realSquareWidth * 4/100);
     }
     group.add(buttonSides);
     group.add(boxGroup);
@@ -132,9 +134,15 @@ export function ButtonBox(display, content, {base=0, bitNumber = 0, buttonFuncti
     });
 
     if (base > 0){
-        AddExponent(group, base, bitNumber, {isHidden: content=="" || content=="0", state: state});
+        AddExponent(group, base, bitNumber,  false,  state);
     }
+    if (returnText){
+        console.log("j");
+        return [group, text];
+    } else {
     return group;
+
+    }
 }
 
 export function SimpleBox(display, content="", {base=0, bitNumber = 0, state = baseState}={})
@@ -145,7 +153,30 @@ export function SimpleBox(display, content="", {base=0, bitNumber = 0, state = b
     }
     return group;
 }
-
+export function WriteClickableNumber(display, number, base, maxDigitCount, buttonFunction = BaseButtonFunction, buttonDirectionDown = true, args=0, state = baseState, addBitNum = false)
+{
+    let textGroups = [];
+    let realSquareWidth = squareWidth;
+    if ("newSquareWidth" in state){
+        realSquareWidth = state["newSquareWidth"];
+    }
+    let group = display.group();
+    for (let i = 0; i < maxDigitCount; i++){
+        let newArgs = [args, i];
+        let digit = Math.floor((number % (base**(i+1)))/(base**i));
+        
+        let text = String(digit);
+        // if (number < base**i && !(number == 0 && i == 0) && i >= minLength){
+        //     text = "";
+        // }
+        let [buttonGroup,textGroup]= ButtonBox(display, text, {base: base, bitNumber: i, buttonFunction: buttonFunction, buttonDirectionDown: buttonDirectionDown, args: newArgs, returnText:true, state: state});
+        buttonGroup.dmove((maxDigitCount-i-1) * (realSquareWidth + borderWidth), 0);
+        group.add(buttonGroup);
+        textGroups.push(textGroup); 
+        //group.add(SimpleBox(display, text, {base: base, bitNumber: i, state: state}).dmove( (maxDigitCount-i-1) * (realSquareWidth + borderWidth), 0));
+    }
+    return [group, textGroups];
+}
 export function WriteNumber(display, number, base, maxDigitCount, state = baseState, minLength = 0)
 {
     let realSquareWidth = squareWidth;
@@ -157,8 +188,6 @@ export function WriteNumber(display, number, base, maxDigitCount, state = baseSt
         let digit = Math.floor((number % (base**(i+1)))/(base**i));
         
         let text = String(digit);
-        console.log(minLength);
-        console.log(state.color);
         if (number < base**i && !(number == 0 && i == 0) && i >= minLength){
             text = "";
         }
