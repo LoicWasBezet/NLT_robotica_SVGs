@@ -17,28 +17,29 @@ export function CreateShaft(parent, borderColor,insideColor, angle, isPointy){
     shaft.rotate(angle,0,0);
     return shaft;
 }
-
+export function CreatePlus(parent, makeBorder)
+{
+    let plusWidth = makeBorder ? 0.65 : 0.8;
+    let group = parent.group();
+    if (makeBorder)
+    {
+        let outerCircle = group.rect(machineWidth,machineWidth).radius(machineWidth/2).fill(colorSelections["blue"].dark).center(0,0);
+        let innerCircle = group.rect(machineWidth-machineBorderWidth*2,machineWidth-machineBorderWidth*2)
+            .radius(machineWidth/2-machineBorderWidth).fill(colorSelections["blue"].light).center(0,0);
+    
+    }
+    let size = machineWidth - 2*machineBorderWidth;
+    let horizontalPlus = group.rect(size*plusWidth,machineBorderWidth).radius(machineBorderWidth/2).fill(colorSelections["blue"].dark).center(0,0);
+    let verticalPlus = group.rect(machineBorderWidth,size*plusWidth).radius(machineBorderWidth/2).fill(colorSelections["blue"].dark).center(0,0);
+    return group;
+}
 export function CreateAdditionMachine(parent, outputAngle)
 {
-    
-
-    let plusWidth = 0.65;
-    let primaryColor = colorSelections["blue"].dark;
-    let secondaryColor = colorSelections["blue"].light;
-    let accentColor = colorSelections["blue"].highlight;
     let group = parent.group();
 
     CreateShaft(group,colorSelections["red"].dark,colorSelections["red"].medium,120-outputAngle, false);
     CreateShaft(group,colorSelections["green"].dark,colorSelections["green"].medium,240-outputAngle, false);
-    CreateShaft(group,colorSelections["blue"].dark,colorSelections["blue"].light,-outputAngle, false);
-
-
-    let outerCircle = group.rect(machineWidth,machineWidth).radius(machineWidth/2).fill(primaryColor).center(0,0);
-    let innerCircle = group.rect(machineWidth-machineBorderWidth*2,machineWidth-machineBorderWidth*2)
-        .radius(machineWidth/2-machineBorderWidth).fill(secondaryColor).center(0,0);
-    let size = machineWidth - 2*machineBorderWidth;
-    let horizontalPlus = group.rect(size*plusWidth,machineBorderWidth).radius(machineBorderWidth/2).fill(primaryColor).center(0,0);
-    let verticalPlus = group.rect(machineBorderWidth,size*plusWidth).radius(machineBorderWidth/2).fill(primaryColor).center(0,0);
-
+    //CreateShaft(group,colorSelections["blue"].dark,colorSelections["blue"].light,-outputAngle, false);
+    CreatePlus(group, true);
     return group;
 }

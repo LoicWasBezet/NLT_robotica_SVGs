@@ -25,13 +25,13 @@ function GenerateDisplay(display)
     let blueNumbers = internal.group();
     let greenNumbers = internal.group();
 
-    let state = {doWritePowers : exponentState.doWritePowers, color : "red"};
+    let state = {"doWritePowers" : exponentState.doWritePowers, "color" : "red"};
     let rightX = (squareWidth + borderWidth) * 3.8;
     let machineCenterX = rightX + (squareWidth+borderWidth)/2/Math.tan(Math.PI/3)
     AddMultiConnector(redNumbers,`0,0 ${rightX},0 ${rightX + Math.sin(Math.PI/6)*squareWidth/2},${-Math.cos(Math.PI/6)*squareWidth/2}`, false, state);
     redNumbers.add(WriteNumber(internal, values[1], exponentState.base, 4, state));
     
-    state = {doWritePowers : exponentState.doWritePowers, color : "green"};
+    state = {"doWritePowers" : exponentState.doWritePowers, "color" : "green"};
     AddMultiConnector(greenNumbers,`0,0 ${rightX},0 ${rightX + Math.sin(Math.PI/6)*squareWidth/2},${Math.cos(Math.PI/6)*squareWidth/2}`, false, state);
 
 
@@ -39,10 +39,10 @@ function GenerateDisplay(display)
 
     redNumbers.dy(squareWidth + borderWidth);
     
-    state = {doWritePowers : exponentState.doWritePowers, color : "blue"};
+    state = {"doWritePowers" : exponentState.doWritePowers, "color" : "blue"};
     let blueY = (squareWidth + borderWidth)*2+borderWidth*2;
     let blueX = lineX - boundingBoxWidth - borderWidth/2 - squareWidth/2- borderWidth*2.5;
-
+ 
 
     AddMultiConnector(blueNumbers,`0,0 ${blueX },0 ${blueX},${-blueY+(squareWidth+borderWidth)/2} ${machineCenterX},${-blueY+(squareWidth+borderWidth)/2}`, true, state);
     blueNumbers.add(WriteNumber(internal, values[0] + values[1], exponentState.base, 4, state));

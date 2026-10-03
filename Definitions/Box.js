@@ -33,12 +33,14 @@ function BaseBox(display, content="", state = baseState)
     const insideRect = group.rect(realSquareWidth-2*borderWidth, realSquareWidth-2*borderWidth).fill(secondary).radius(borderWidth).center(0,0).attr({ 'pointer-events': 'none' });
     
     let fontSize = (realSquareWidth - (2 * borderWidth)) * 0.8;
-    
-    var text = group.text(String(content))
+    let text = null;
+    if (!isEmpty){        
+    text = group.text(String(content))
     .font({ fill: colorSelections[state["color"]].dark, family: 'monospace', weight: 700, size: fontSize })
     .center(0,0)
     .attr({ 'user-select': 'none' }).attr({ 'pointer-events': 'none' });;
 
+    }
     return [group, insideRect, borderRect, text];
 }
 
@@ -144,7 +146,7 @@ export function SimpleBox(display, content="", {base=0, bitNumber = 0, state = b
     return group;
 }
 
-export function WriteNumber(display, number, base, maxDigitCount, state = baseState)
+export function WriteNumber(display, number, base, maxDigitCount, state = baseState, minLength = 0)
 {
     let realSquareWidth = squareWidth;
     if ("newSquareWidth" in state){
@@ -155,10 +157,30 @@ export function WriteNumber(display, number, base, maxDigitCount, state = baseSt
         let digit = Math.floor((number % (base**(i+1)))/(base**i));
         
         let text = String(digit);
-        if (number < base**i && !(number == 0 && i == 0)){
+        console.log(minLength);
+        console.log(state.color);
+        if (number < base**i && !(number == 0 && i == 0) && i >= minLength){
             text = "";
         }
         group.add(SimpleBox(display, text, {base: base, bitNumber: i, state: state}).dmove( (maxDigitCount-i-1) * (realSquareWidth + borderWidth), 0));
+    }
+    return group;
+}
+export function WriteRawNumbers(display, numbers, state = baseState)
+{
+    let realSquareWidth = squareWidth;
+    if ("newSquareWidth" in state){
+        realSquareWidth = state["newSquareWidth"];
+    }
+    let group = display.group();
+    for (let i = 0; i < numbers.length; i++){
+
+        let text = String(numbers[numbers.length-i-1]);
+        if (!/^\d+$/.test(text))//check if it is not a digit
+        {
+            text = "";
+        }
+        group.add(SimpleBox(display, text, {base: 0, bitNumber: 0, state: state}).dmove( (numbers.length-i-1) * (realSquareWidth + borderWidth), 0));
     }
     return group;
 }

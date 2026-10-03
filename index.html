@@ -39,10 +39,12 @@
     import { render as renderCounter } from './BitCounter.js';
     import { render as renderFlipper } from './BitFlipper.js';
     import { render as renderAddition } from './BitAddition.js';
+    import { render as renderAdditionSteps } from './BitAdditionSteps.js';
 
     renderCounter(document.getElementById('machine-container'));
     renderFlipper(document.getElementById('machine-container2'));
     renderAddition(document.getElementById('machine-container3'));
+    renderAdditionSteps(document.getElementById('machine-container4'), {base : 10});
 
     </script>
 
