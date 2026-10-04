@@ -44,7 +44,7 @@ function BaseBox(display, content="", state = baseState)
     return [group, insideRect, borderRect, text];
 }
 
-function AddExponent(buttonGroup,base, bitNumber, isHidden, state = baseState){
+export function AddExponent(buttonGroup,base, bitNumber, isHidden, state = baseState, centered = false){
     
     
     let realSquareWidth = squareWidth;
@@ -79,8 +79,10 @@ function AddExponent(buttonGroup,base, bitNumber, isHidden, state = baseState){
     let width = Math.max(exponantialWidth,textGroup.bbox().width+(exponantialWidth) * 0.35);
     let insideRect = backGround.rect(width,exponantialWidth).fill(secondary).radius(exponantialWidth/2).center(0,0);
 
-
-    exponent.dmove(-realSquareWidth/2 + borderWidth*6/4 + (width-exponantialWidth)/2, -realSquareWidth/2 + borderWidth*6/4);
+    if (!centered)
+    {
+        exponent.dmove(-realSquareWidth/2 + borderWidth*6/4 + (width-exponantialWidth)/2, -realSquareWidth/2 + borderWidth*6/4);
+    }
     return exponent;
 }
 
@@ -228,7 +230,7 @@ export function AddConnector(display, length, isHorizontal, isBright, state = ba
     let connectorCover = group.rect(isHorizontal ? height : width, isHorizontal ? width : height).fill(coverColor).radius(width/2).move(-width/2,-width/2);
     let connector = group.rect(isHorizontal ? height-2*borderWidth : borderWidth, isHorizontal ? borderWidth : height-2*borderWidth).fill(connectorColor).radius(borderWidth/2)
         .move( -borderWidth/2,  -borderWidth/2);
-    return connectorCover,connector;
+    return [connectorCover,connector];
 }
 
 export function AddMultiConnector(display, path, isBright, state = baseState)

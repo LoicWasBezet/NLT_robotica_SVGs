@@ -13,7 +13,6 @@
             background-color: #FFFFFF; 
             display: flex;
             flex-direction: column;
-            gap: 50px;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -24,18 +23,89 @@
             /* border: 1px solid black; */
             display: inline-block; 
         } 
+        .content {
+            width: 50vw;
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
     <br><br>
-    <div id="machine-container" class="container"></div>
+    <p>TODO waarom binair bij computers?</p>
+    <p class="content">Je hebt misschien al eens gehoord dat computers werken met binaire getallen. 
+        Dat betekent dat ze elk getal opslaan als een combinatie van eenen en nullen. 
+        Door meerdere van deze naast elkaar te zetten kunnen we grote getallen opschrijven! 
+        Het lijkt eigenlijk best wel op onze manier van getallen schrijven, 
+        behalve dat wij naast de 1 en 0 ook de cijfers van 2 tot en met 9 gebruiken. Dit heet talstelsel 10.
+         Wanneer je enkel de getallen 0 en 1 gebruikt heet het talstelsel 2 
+         (ook wel binaire getallen of base 2). We noemen het meest insignificante cijfer 
+         (het meest rechter cijfer) het nulde cijfer, het cijfer links daarvan het eerste cijfer, 
+         enzovoort.</p>
+         <p class="content">In het blok hieronder zie je hoe een bepaalde hoeveelheid geschreven kan worden op meerdere manieren.
+            Wij gebruiken dus talstelsel (base) 10, maar je kan ook talstelsel 2 of bijvoorbeeld romeinse cijfers gebruiken!
+            Je hebt dus meerdere manieren om hetzelfde getal te schrijven! Het talstelsel bepaalt alleen maar hoe je een bepaalde hoeveelheid opschrijft, niet hoeveel je van iets hebt.
+         </p>
+
+        <div id="machine-container" class="container"></div>
+        <p class="content"> In het blok hierboven zie je dat elk getal in de talstelsels
+            een geel bolletje in de linkerbovenhoek heeft. Dit hebben we erbij gezet om het 
+            makkelijk te maken om te zien hoeveel elk cijfer waard is. Bij base 10 is het nulde cijfer 1 waard en elk cijfer daar links van steeds 10 keer meer. 
+            Kijk bijvoorbeeld naar 342. Het nulde cijfer voegt 1 * 2 = 2 aan het totaal toe. 
+            Het eerste cijfer (de 4) voegt 4 * 10 toe aan het totaal. 
+            Het tweede cijfer voegt 3 * 10 * 10 = 300 toe aan het totaal.</p>
+
+        <p class="content">Bij binaire getallen is het nulde cijfer ook 1 waard. 
+            Elk cijfer links daarvan is echter steeds 2 keer zoveel waard in plaats van 10. 
+            Kijk bijvoorbeeld naar 1011: het nulde cijfer voegt 1*1 = 1 toe aan het totaal. 
+            Het eerste cijfer links daarvan voegt 1 * 2 = 2 toe aan het totaal.
+             Het tweede cijfer voegt 0 * 2^2 = 0 toe aan het totaal. 
+             Het derde cijfer voegt 1 * 2^3 = 8 toe aan het totaal.
+              1 + 2 + 0 + 8 = 11 dus 11 als binair getal is 1011! 
+              Een enkel binair cijfertje heet een bit. 
+              1011 bestaat dus uit 4 bits. 8 bits worden samen ook wel een byte genoemd.</p>
+            <p class="content">In het blok hieronder kan je zelf een binair getal maken door op de bits te klikken.  
+                Probeer eens om het binaire getal 0101 te maken! Welk hoeveelheid is dat in base 10?
+                Je kan ook proberen om het binaire getal 1111 te maken, dat is het grootste getal dat je met 4 bits kan maken!</p>
+    <p class="content">Opdracht: maak de getallen 1 tot en met 15 in het blok hieronder!</p>
+    
     <div id="machine-container2" class="container"></div>
     <div id="machine-container5" class="container"></div>
-    <div id="machine-container3" class="container"></div>
+
+<p class="content">In de de rest van het hoofdstuk gaan we kijken naar hoe we kunnen rekenen 
+    met binaire getallen. In de context van elektronica is het handig om wiskundige bewerkingen 
+    te zien als machines. Een machine heeft een of meer ingangssignalen en een of meer uitgangssignalen. 
+    Een optelmachine zou er als volgt uit kunnen zien:
+DEZE IN BASE 10 ZETTEN</p>
+    <div id="machine-container3" class="container"></div> 
+
+
+    <p class = "content"> Binaire getallen optellen is niet moeilijker dan getallen vanuit base 10.
+         Onthoud voor het volgende deel dat het meest rechter cijfer het nulde cijfer genoemd wordt, 
+         het cijfer links daarvan het eerste, enzovoort.
+         Wanneer je 17 en 29 wil optellen (in base 10) kan je eerst met de nulde getallen 7+9 = 16 uitrekenen. 
+         Je schrijft de 6 op als nulde cijfer en onthoudt de 1. 
+          Om het eerste cijfer uit te rekenen doe je 1 + 2 (van 17 en 29) + 1 (die je onthield) = 4. 
+          Je schrijft de 4 op als eerste cijfer en je hebt het antwoord: 46. 
+          Dit is uiteraard kinderspel. In het blok hieronder kan je nog een keer kijken hoe de stappen eruit zien voor
+          bijvoorbeeld 517 + 845.
+
+
+    </p>
     <div id="machine-container4" class="container"></div>
+            
+    <p class = "content">Optellen bij binaire getallen kan met exact dezelfde stappen gedaan worden. 
+        Kijk maar naar de stappen in het blok hieronder:</p>   
+    <div id="machine-container6" class="container"></div>
+    <p class="content">In deze opdracht gaan we oefenen met het omschrijven van getallen tussen base 2 en base 10, en het optellen van binaire getallen.</p>
+        <p class = "content">Schrijf de volgende getallen op in base 2: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11.</p>
+        <p class="content">a) Reken de som van 10 en 111 (base 2) uit in base 2. Volg voor deze vraag dezelfde stappen als in het blok hierboven.</p>
+    
+        <p class="content">b) Zet de getallen 10 en 111 (base 2) om naar base 10</p>
+    <p class="content">c) Tel deze getallen bij elkaar op in base 10 en zet het antwoord weer om naar base 2. Is het antwoord hetzelfde als bij vraag a?</p>
 
 
-    <p>Opdracht: maak de getallen 1 tot 15 op de flipper</p>
+    <p class="content"> d) Reken de som van 1011 en 1001 (base 2) uit in base 2.</p>
+
     <script type="module">
     import { render as renderCounter } from './BitCounter.js';
     import { render as renderFlipper } from './BitFlipper.js';
@@ -48,8 +118,10 @@
     renderNewFlipper(document.getElementById('machine-container5'));
     renderAddition(document.getElementById('machine-container3'));
     renderAdditionSteps(document.getElementById('machine-container4'), {base : 10});
+    renderAdditionSteps(document.getElementById('machine-container6'), {base : 2});
 
-    </script>
-
+    </script> 
+    
+ 
 </body>
 </html>

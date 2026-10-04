@@ -17,18 +17,18 @@ export function CreateShaft(parent, borderColor,insideColor, angle, isPointy){
     shaft.rotate(angle,0,0);
     return shaft;
 }
-export function CreatePlus(parent, makeBorder)
+export function CreatePlus(parent, makeBorder, width = machineWidth)
 {
     let plusWidth = makeBorder ? 0.65 : 0.8;
     let group = parent.group();
     if (makeBorder)
     {
-        let outerCircle = group.rect(machineWidth,machineWidth).radius(machineWidth/2).fill(colorSelections["blue"].dark).center(0,0);
-        let innerCircle = group.rect(machineWidth-machineBorderWidth*2,machineWidth-machineBorderWidth*2)
-            .radius(machineWidth/2-machineBorderWidth).fill(colorSelections["blue"].light).center(0,0);
+        let outerCircle = group.rect(width,width).radius(width/2).fill(colorSelections["blue"].dark).center(0,0);
+        let innerCircle = group.rect(width-machineBorderWidth*2,width-machineBorderWidth*2)
+            .radius(width/2-machineBorderWidth).fill(colorSelections["blue"].light).center(0,0);
     
     }
-    let size = machineWidth - 2*machineBorderWidth;
+    let size = width - 2*machineBorderWidth;
     let horizontalPlus = group.rect(size*plusWidth,machineBorderWidth).radius(machineBorderWidth/2).fill(colorSelections["blue"].dark).center(0,0);
     let verticalPlus = group.rect(machineBorderWidth,size*plusWidth).radius(machineBorderWidth/2).fill(colorSelections["blue"].dark).center(0,0);
     return group;
