@@ -15,7 +15,7 @@ let values = [1,1];
 let lineX = screenWidth - boundingBoxWidth  - (squareWidth+borderWidth) - squareWidth/2;
 //let lineX = boundingBoxWidth  +(squareWidth+borderWidth) + squareWidth/2;
 
-let exponentState = {doWritePowers : false, base : 2}
+let exponentState = {doWritePowers : false, base : 10}
 
 function GenerateDisplay(display)
 {
@@ -84,12 +84,12 @@ function GenerateControls(draw, display)
     redButtons.dy(squareWidth+borderWidth);
     
     let toggles = controls.group(); 
-    let baseToggle = BaseChangeToggle(display, exponentState, GenerateDisplay);
+    //let baseToggle = BaseChangeToggle(display, exponentState, GenerateDisplay);
     let powerToggle = PowerChangeToggle(display, exponentState, GenerateDisplay);
-    let height = baseToggle.bbox().height;
-    baseToggle.dy(-height/2-borderWidth/2);
+    let height = powerToggle.bbox().height;
+    //baseToggle.dy(-height/2-borderWidth/2);
     powerToggle.dy(height/2+borderWidth/2);
-    toggles.add(baseToggle);
+    //toggles.add(baseToggle);
     toggles.add(powerToggle);
     
     toggles.dy(squareWidth*2+borderWidth*4);

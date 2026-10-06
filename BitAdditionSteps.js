@@ -208,13 +208,27 @@ function GenerateDisplay(display)
 
 
 
-    internal.dmove( -borderWidth*2 + boundingBoxWidth+squareWidth*3/2+borderWidth*3/2,boundingBoxWidth+squareWidth/2+borderWidth/2);
     let width = squareWidth*0.7;
 
-    let stepCounter = display.group();
-    stepCounter.add(SimpleBox(display, String(step), {base:0, bitNumber:0, state: {doWritePowers : exponentState.doWritePowers, color : "blue", "newSquareWidth" : width}}).dx(squareWidth*0.6+borderWidth));
-    stepCounter.dx(width/2 + boundingBoxWidth + borderWidth*2+(squareWidth+borderWidth)*5).cy(squareWidth*3+borderWidth*5);
-    stepCounter.dmove(0,boundingBoxWidth+squareWidth/2+borderWidth/2);
+    let stepCounter = internal.group();
+    // stepCounter.add(SimpleBox(display, "STAP " + String(step), {base:0, bitNumber:0, state: {doWritePowers : exponentState.doWritePowers, color : "blue", "newSquareWidth" : width}}).dx(squareWidth*0.6+borderWidth));
+    // stepCounter.dx(width/2 + boundingBoxWidth + borderWidth*2+(squareWidth+borderWidth)*5).cy(squareWidth*2+borderWidth*2);
+    // stepCounter.dmove(0,boundingBoxWidth+squareWidth/2+borderWidth/2);
+    let primary = colorSelections["blue"].dark;
+    let secondary = colorSelections["blue"].light;
+
+    const borderRect = stepCounter.rect(squareWidth*2+borderWidth, squareWidth*0.7).fill(primary).radius(2*borderWidth).center(0,0);
+    const insideRect = stepCounter.rect(squareWidth*2-borderWidth, squareWidth*0.7-borderWidth*2).fill(secondary).radius(borderWidth).center(0,0).attr({ 'pointer-events': 'none' });
+    
+    let fontSize = (squareWidth - (2 * borderWidth)) * 0.5;
+    let text = stepCounter.text( "STAP " + (step < 10 ? "0" : "")+ String(step))
+    .font({ fill: primary, family: 'monospace', weight: 700, size: fontSize })
+    .center(0,0)
+    .attr({ 'user-select': 'none' }).attr({ 'pointer-events': 'none' });;
+    stepCounter.dmove(squareWidth*4 + borderWidth*4 + squareWidth/2+borderWidth/2, -squareWidth*0.15)
+
+    internal.dmove(+ boundingBoxWidth+squareWidth*3/2+borderWidth*3/2,boundingBoxWidth+squareWidth/2+borderWidth/2);
+
 
 }
 function DrawMovingPlus(parent,startColumn, column){
@@ -246,10 +260,10 @@ function GenerateControls(draw, display)
 
     let width = squareWidth*0.6;
 
-    buttons.add(ButtonBox(display, '>', {buttonFunction: Press, buttonDirectionDown: true, args: [step, 1], state: {doWritePowers : exponentState.doWritePowers, color : "blue", "newSquareWidth" : width}}).dx(width+borderWidth*2 + (squareWidth * 0.7)));
+    buttons.add(ButtonBox(display, '>', {buttonFunction: Press, buttonDirectionDown: true, args: [step, 1], state: {doWritePowers : exponentState.doWritePowers, color : "blue", "newSquareWidth" : width}}).dx(width+borderWidth));
     
     buttons.add(ButtonBox(display, '<', {buttonFunction: Press, buttonDirectionDown: true, args: [step, -1], state: {doWritePowers : exponentState.doWritePowers, color : "blue", "newSquareWidth" : width}}));
-    buttons.dx(width/2 + borderWidth*2+boundingBoxWidth+(squareWidth+borderWidth)*5).cy(squareWidth*3+borderWidth*5);//
+    buttons.dx(screenWidth-width*1.5-borderWidth*1.5-boundingBoxWidth).dy(-squareWidth*0.15+width + borderWidth*1.5);//
     
     
     //let toggles = controls.group(); 
@@ -275,6 +289,7 @@ function DrawBackground(draw)
     
     let lineY = (squareWidth+borderWidth)*3 + boundingBoxWidth + borderWidth/2;
     draw.rect(screenWidth,screenHeight).fill(inputColor).radius(boundingBoxWidth+2*borderWidth);
+    //draw.rect(borderWidth,screenHeight).fill(borderColor).dx(lineX);
 
     draw.rect(screenWidth,screenHeight-lineY-borderWidth).fill(outputColor).radius(boundingBoxWidth+2*borderWidth).dy(lineY+borderWidth);
     draw.rect(screenWidth,boundingBoxWidth+2*borderWidth).fill(outputColor).dy(lineY+borderWidth);
@@ -287,7 +302,6 @@ function DrawBackground(draw)
     draw.rect(boundingBoxWidth+2*borderWidth,lineY).fill(sideColor).dx(lineX+borderWidth);
     draw.rect(screenWidth-borderWidth-lineX,lineY-boundingBoxWidth-borderWidth*2).fill(sideColor).dx(lineX+borderWidth).dy(boundingBoxWidth+borderWidth*2);
 
-    draw.rect(borderWidth,screenHeight).fill(borderColor).dx(lineX);
 
     draw.rect(screenWidth,borderWidth).fill(borderColor).dy(lineY);
 
